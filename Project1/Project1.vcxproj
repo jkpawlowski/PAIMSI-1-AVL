@@ -116,9 +116,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AVLtree.h" />
+    <ClInclude Include="Branch.h" />
     <ClInclude Include="Menu.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AVLtree.cpp" />
+    <ClCompile Include="Branch.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
   </ItemGroup>
