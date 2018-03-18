@@ -24,7 +24,7 @@ void Menu::ShowOptions()
 
 bool Menu::Proceed(int o,AVLtree *tree)
 {
-	if (o = 0)return false;
+	if (o == 0)return false;
 	switch(o) {
 	case 1: 
 		int x;
@@ -33,9 +33,9 @@ bool Menu::Proceed(int o,AVLtree *tree)
 		tree->Add(x);
 		break;
 	case 2: 
-		tree->Print(cout);
+		tree->Print(cout); break;
 	case 3: ShowOptions(); break;
-	default: cout << "BLAD   zly wybor" << endl;
+	default: cout << "BLAD   zly wybor" << endl; break;
 	}
 	return true;
 }

@@ -3,11 +3,12 @@
 using namespace std;
 class Branch
 {
+public:
 	int value;
 	int weight;
 	Branch *left;
 	Branch *right;
-public:
+
 	Branch();
 	Branch(const int &x) {
 		value = x;
@@ -16,7 +17,10 @@ public:
 	virtual ~Branch();
 	void Add(const int &x);
 	Branch* FindPlace(const int &x);
-	void Print(ostream& out) { out << "->rdzen" << value << "->nogi"; left->Print(out); right->Print(out); out << endl; }
+	void Print(ostream& out) { 
+		out << "->rdzen" << value << "->nogi"; 
+		if(left!=nullptr)left->Print(out); 
+		if(right!=nullptr)right->Print(out); out << endl; }
 	
 };
 
