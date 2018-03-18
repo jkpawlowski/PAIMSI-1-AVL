@@ -3,7 +3,7 @@
 
 bool TreePrinter::Load() {
 	shared_ptr<list<Branch*>> ptr; //dynamiczny wskaznik do warstwy elementow drzewa 
-	ptr = make_shared<shared_ptr<list<Branch*>>>();
+	ptr = make_shared<list<Branch*>>();
 
 	{ //dodawanie pierwszego glownego elementu
 		if (root->value != NULL) {
@@ -16,24 +16,50 @@ bool TreePrinter::Load() {
 		}
 	}
 
+	//pozostale 
+
+	shared_ptr<list<Branch*>> nxt;
+	nxt= make_shared<list<Branch*>>();
+	while (1) {
+		if (!LayerfromLayer(layers.top(), nxt))
+			break;
+		layers.push(nxt);
+		nxt= make_shared<list<Branch*>>();
+	};
+	
+	
+	return 1;
 }
 
-shared_ptr<list<Branch*>> TreePrinter::LayerfromLayer(shared_ptr<list<Branch*>>prev, shared_ptr<list<Branch*>> nxt) {
+bool TreePrinter::LayerfromLayer(shared_ptr<list<Branch*>>prev, shared_ptr<list<Branch*>> nxt) {
 
 	//dodanie wszystkich nowych galezi od lewej do prawej po kolei z elementow warstwy prev do next
-	AddToLayer(ptr, root);
-	layers.push(ptr);
+	int i=0;
+	for (Branch* r : *(prev)) {
+		AddToLayer(nxt, r);
+		i++;
+	}
+	return bool(i);
 
-	return nxt;
-}
-TreePrinter::~TreePrinter()
-{
-	Print();
 }
 
 void TreePrinter::Print()
 { //wypisanie wszystkich warstw
-	shared_ptr<list<Branch*>> ptr = layers.top();
-	layers.pop();
+	
+	
+	while (shared_ptr<list<Branch*>> ptr = layers.top()) {
+		layers.pop();
+		int layer = layers.size()-3;
+		for (Branch* r : *(ptr)) {
+			for (int i=15-(3*layer);i==0;i--) cout << " ";
+			
+			cout.width(3);
+			cout.fill(' ');
+			r->Print(cout);
+			cout << "   ";
+			layer--;
+		}
+		cout << endl;
+	}
 	
 }

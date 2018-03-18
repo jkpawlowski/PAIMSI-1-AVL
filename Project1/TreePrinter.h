@@ -19,11 +19,13 @@ public:
 	}
 	TreePrinter(Branch *r) {
 		root = r;
+		layers.push(NULL);
 		 Load(); //wczytanie drzewa z pnia
+
 	}
 	~TreePrinter() {Print();}
 	void Print(); //wypisuje drzewo
 	bool Load(); //wczytuje drzewo
-	shared_ptr<list<Branch*>> LayerfromLayer(shared_ptr<list<Branch*>>prev, shared_ptr<list<Branch*>> nxt);
+	bool LayerfromLayer(shared_ptr<list<Branch*>>prev, shared_ptr<list<Branch*>> nxt);
 };
 

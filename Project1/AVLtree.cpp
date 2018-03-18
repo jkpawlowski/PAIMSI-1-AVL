@@ -5,6 +5,7 @@
 AVLtree::AVLtree()
 {
 	root = new Branch(10);
+
 }
 
 

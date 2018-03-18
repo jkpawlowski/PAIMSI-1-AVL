@@ -39,6 +39,7 @@ Branch * Branch::FindPlace(const int &x)
 			return right;
 		}
 	}
-	
+	std::cout << "obiekt wystapil wczesniej" << endl;
+	return NULL;
 	}
 
