@@ -3,7 +3,7 @@
 int main() {
 	using namespace std;
 
-	AVLtree tree();
+	AVLtree tree;
 	cout << "hello world" << endl;
 
 	while (1);
