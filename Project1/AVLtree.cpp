@@ -4,7 +4,7 @@
 
 AVLtree::AVLtree()
 {
-	root = new Branch(10);
+	root = new Branch();
 
 }
 

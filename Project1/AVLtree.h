@@ -9,8 +9,8 @@ class AVLtree
 public:
 	AVLtree();
 	~AVLtree();
-	void Add(int &x) { root->Add(x); }
-	void Print(std::ostream &out) {
-		TreePrinter *p=new TreePrinter(root); delete p;}
+	void Add(const int &x) { root->Add(x); }
+	void Print(std::ostream &out) {TreePrinter *p=new TreePrinter(out,root); delete p;}
+	//void Delete(const int &x) { root->Cut(root->Find(x)); }
 };
 

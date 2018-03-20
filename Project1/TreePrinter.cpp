@@ -1,65 +1,57 @@
 #include "TreePrinter.h"
 
-
-bool TreePrinter::Load() {
-	shared_ptr<list<Branch*>> ptr; //dynamiczny wskaznik do warstwy elementow drzewa 
-	ptr = make_shared<list<Branch*>>();
-
-	{ //dodawanie pierwszego glownego elementu
-		if (root->value != NULL) {
-			ptr->push_front(root);
-			layers.push(ptr);
-		}
-		else {
-			cout << "puste dzrzewo" << endl;
-			return 0;
-		}
-	}
-
-	//pozostale 
-
-	shared_ptr<list<Branch*>> nxt;
-	nxt= make_shared<list<Branch*>>();
-	while (1) {
-		if (!LayerfromLayer(layers.top(), nxt))
-			break;
-		layers.push(nxt);
-		nxt= make_shared<list<Branch*>>();
-	};
 	
+void TreePrinter::Load() {
 	
-	return 1;
-}
-
-bool TreePrinter::LayerfromLayer(shared_ptr<list<Branch*>>prev, shared_ptr<list<Branch*>> nxt) {
-
-	//dodanie wszystkich nowych galezi od lewej do prawej po kolei z elementow warstwy prev do next
-	int i=0;
-	for (Branch* r : *(prev)) {
-		AddToLayer(nxt, r);
-		i++;
-	}
-	return bool(i);
-
-}
-
-void TreePrinter::Print()
-{ //wypisanie wszystkich warstw
+	queue<Branch*> que; //kolejka robocza
+	Branch* br=new Branch(root->value) ;//roboczy
+	br = root;
+	que.push(br);
 	
-	
-	while (shared_ptr<list<Branch*>> ptr = layers.top()) {
-		layers.pop();
-		int layer = layers.size()-3;
-		for (Branch* r : *(ptr)) {
-			for (int i=15-(3*layer);i==0;i--) cout << " ";
+
+	//que.push(br);
+
+	for (int l = 0 ; l < high; l++) {  //petla warstw
+		
+		for (int e = 0; e < Width(l); e++) {
 			
-			cout.width(3);
-			cout.fill(' ');
-			r->Print(cout);
-			cout << "   ";
-			layer--;
+			br = que.front();
+			que.pop();
+
+			if (br != nullptr) {
+				tab[l][e] = br->value;
+				que.push(br->left);
+				que.push(br->right);
+			}
+			else {
+				tab[l][e] = NULL;
+				que.push(nullptr);
+				que.push(nullptr);
+			}
+
+			
 		}
-		cout << endl;
 	}
 	
+}
+
+void TreePrinter::Print() {
+
+	
+	int w[] = { 21,9,3,0 };//wciecia
+	int s[] = { 0,21,9,3 };//odstepy
+
+	for (int l = 0; l < high; l++) {  //petla warstw
+		for (int i = 0; i < w[l]; i++) cout << " ";//wciecie
+		for (int e = 0; e < Width(l); e++) {
+			if (tab[l][e] != NULL) {
+				str->width(3);
+				str->fill('_');
+				*str << tab[l][e];
+			}
+			else *str << "_|_";
+			for (int i = 0; i < s[l]; i++) *str << " ";
+		}
+		*str <<endl;
+	}
 }

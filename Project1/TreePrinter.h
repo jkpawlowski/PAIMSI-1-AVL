@@ -1,31 +1,31 @@
 #pragma once
 #include "Branch.h"
-#include <stack>
-#include <list>
+#include <queue>
 #include <memory>
 using namespace std;
 class TreePrinter
 {
 	Branch *root;
-	stack<shared_ptr<list<Branch*>>> layers;
-	
+	int **tab; //tablica wartosci do wyjscia
+	int high = 4; //roboczo wysokosc drzewa
+	ostream *str;
 public:
-	void AddToLayer(shared_ptr<list<Branch*>>ptr , Branch *r) {  //ustalanie nowej warstwy od pnia
-		
-		if (r->left != nullptr)
-			ptr->push_back(r->left);
-		if (r->right != nullptr)
-			ptr->push_back(r->right);
-	}
-	TreePrinter(Branch *r) {
+	
+	TreePrinter(ostream& out,Branch *r) {
 		root = r;
-		layers.push(NULL);
-		 Load(); //wczytanie drzewa z pnia
+		str = &out;
 
+		tab = new  int*[high];
+		for (int lvl = high-1; lvl >=0; lvl--) 
+			tab[lvl] = new int[Width(lvl)];
+		
+		
+		Load(); //wczytanie drzewa z pnia
 	}
 	~TreePrinter() {Print();}
 	void Print(); //wypisuje drzewo
-	bool Load(); //wczytuje drzewo
-	bool LayerfromLayer(shared_ptr<list<Branch*>>prev, shared_ptr<list<Branch*>> nxt);
+	void Load(); //wczytuje drzewo
+	
+	int	Width(int l) { int t = 1; for (; l != 0; l--)t *= 2; return t; }
 };
 

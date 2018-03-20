@@ -2,12 +2,7 @@
 
 
 
-Branch::Branch()
-{
-		left = nullptr;
-		right = nullptr;
-		
-}
+
 
 Branch::~Branch()
 {
@@ -17,11 +12,15 @@ Branch::~Branch()
 void Branch::Add(const int &x)
 {
 	Branch *place= FindPlace( x);
+	if(place!=nullptr)
 	place->value = x;
+	
 }
 
 Branch * Branch::FindPlace(const int &x)
 {	
+	if (value == NULL)
+		return this;
 	if (x < value) {
 		if (left != nullptr)
 			return left->FindPlace(x);
@@ -39,7 +38,8 @@ Branch * Branch::FindPlace(const int &x)
 			return right;
 		}
 	}
+	
 	std::cout << "obiekt wystapil wczesniej" << endl;
-	return NULL;
+	 return nullptr;
 	}
 
