@@ -15,8 +15,10 @@ void Menu::ShowOptions()
 {
 	cout << " Opcje AVL tree : " << endl
 		<< "1. Dopisz element." << endl
-		<< "2.Wypisz elementy." << endl
-		<< "3.Wyswietl opcje." << endl
+		<< "2.Wypisz elementy (wys. max 5)." << endl
+		<< "3.Usun element." << endl
+		<< "4.Wysokosc drzewa?" << endl
+		<< "9.Wyswietl opcje." << endl
 		<< "0.Wyjdz." << endl;
 
 
@@ -34,7 +36,16 @@ bool Menu::Proceed(int o,AVLtree *tree)
 		break;
 	case 2: 
 		tree->Print(cout); break;
-	case 3: ShowOptions(); break;
+	case 3:
+		
+		cout << "Podaj liczbe: ";
+		cin >> x;
+		tree->Delete(x);
+		break;
+	case 4:
+		cout<<"wysokosc drzewa wynosi: "<<tree->High()<<endl; 
+		break;
+	case 9: ShowOptions(); break;
 	default: cout << "BLAD   zly wybor" << endl; break;
 	}
 	return true;
