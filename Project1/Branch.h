@@ -9,41 +9,30 @@ public:
 	
 	Branch *left; //wskaznik na mniejsza wartosc
 	Branch *right; //wskaznik na wieksza wartosc
-	Branch *root;// pochodzenie
+	
 	////////////////////////////////////////////////////////
 
 //---------------konstruktory i dekonstruktoru----------//
-	Branch() { left = nullptr; right = nullptr; root = nullptr; value = NULL; }
-	Branch(const int &x, Branch* r) {left = nullptr; right = nullptr; value = x; root = r;
-	if(root!=0)cout << "root" << root << endl;
-	if(left!=0)cout << "lewy wsk" << left << endl;
+	Branch() { left = nullptr; right = nullptr;  value = NULL; }
+	Branch(const int &x, Branch* r) {left = nullptr; right = nullptr; value = x; 
+	
 
 	}
 	virtual ~Branch();
 //---------------metody---------------------------------//	
 	
-	
+	void InOrder();
+	void PostOrder();
+	void PreOrder();
+
+	Branch* Root(Branch*);
 	void Print(ostream& out) { out << value;}
 	bool Join(Branch* b);
 	bool Unplug(Branch &b);
-	int High() {
-		if ((this == NULL))return 1;
-		
-		
-
-		int r=1; 
-		int l=1;
-		if (right != nullptr) {
-			r = right->High() + 1; }
-		if (left != nullptr) { 
-			l = left->High() + 1; }
-		if (r > l)return r; 
-		else return l;
-	}
+	int High();
 	
-	//Branch* operator= (Branch* arg) {
-	//	return arg;
-	//}
+	
+	//Branch* operator= (Branch* arg) {return arg;}
 	
 };
 

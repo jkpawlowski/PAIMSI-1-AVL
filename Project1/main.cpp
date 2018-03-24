@@ -9,8 +9,9 @@ int main() {
 	m.ShowOptions();
 	
 	while (		m.Proceed( m.GetOrder(), tree)		);
-	
+	delete tree;
+
     
-	
+	while (1);
 	return 0;
 }
