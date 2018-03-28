@@ -58,6 +58,11 @@ bool Menu::Proceed(int o,AVLtree *tree)
 		cout << "Czynnosci Post-Order" << endl;
 		tree->root->PostOrder();
 		break;
+	case 8:
+		cout << "Nowe drzewo" << endl;
+		delete tree;
+		tree = new AVLtree();
+		break;
 	case 9: ShowOptions(); break;
 	default: cout << "BLAD   zly wybor" << endl; break;
 	}

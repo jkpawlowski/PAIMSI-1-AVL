@@ -3,6 +3,7 @@
 #include "Menu.h"
 int main() {
 	using namespace std;
+
 	Menu m;
 	AVLtree *tree;
 	tree = new AVLtree();
@@ -11,7 +12,5 @@ int main() {
 	while (		m.Proceed( m.GetOrder(), tree)		);
 	delete tree;
 
-    
-	while (1);
 	return 0;
 }

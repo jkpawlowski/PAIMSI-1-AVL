@@ -13,8 +13,6 @@ public:
 
 	
 	TreePrinter(ostream& out,Branch *r) {
-		
-		
 		str = &out;
 		high = r->High();
 
@@ -25,7 +23,13 @@ public:
 		if(r!=nullptr)
 		Load(r); //wczytanie drzewa z pnia
 	}
-	~TreePrinter() { Print();}
+
+	~TreePrinter() { Print(); 
+	for(int i=0;i<high;i++)
+	delete []tab [i];
+	delete [] tab;
+	}
+
 	void Print(); //wypisuje drzewo
 	void Load(Branch*); //wczytuje drzewo
 	

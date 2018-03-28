@@ -14,10 +14,7 @@ public:
 
 //---------------konstruktory i dekonstruktoru----------//
 	Branch() { left = nullptr; right = nullptr;  value = NULL; }
-	Branch(const int &x, Branch* r) {left = nullptr; right = nullptr; value = x; 
-	
-
-	}
+	Branch(const int &x, Branch* r) {left = nullptr; right = nullptr; value = x; }
 	virtual ~Branch();
 //---------------metody---------------------------------//	
 	
@@ -25,14 +22,11 @@ public:
 	void PostOrder();
 	void PreOrder();
 
-	Branch* Root(Branch*);
-	void Print(ostream& out) { out << value;}
-	bool Join(Branch* b);
-	bool Unplug(Branch &b);
-	int High();
-	
-	
-	//Branch* operator= (Branch* arg) {return arg;}
+	Branch* Root(Branch*); //zwraca ojca danej galezi
+	void Print(ostream& out) { out << value;} //wypisuje galaz na strumien
+	bool Join(Branch* b); //dolacza do galezi
+	bool Unplug(Branch &b); //odlacza od galezi
+	int High();	//zwraca wysokosc
 	
 };
 

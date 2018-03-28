@@ -13,8 +13,7 @@ AVLtree::AVLtree()
 
 AVLtree::~AVLtree()
 {
-	if(root!=0)delete root;
-	
+	delete root;
 }
 void AVLtree::Print(std::ostream &out) {
 	if (root != nullptr) {
@@ -76,7 +75,14 @@ void AVLtree::Cut(Branch * x)
 	
 
 	if (x != nullptr) {
-	/*ok*/	if ((x->left == nullptr) && (x->right == nullptr) && (x == root)) root = nullptr;//jest pniem drzewa i ostatni
+		if (x == root) {
+			
+			if ((x->left == nullptr) && (x->right == nullptr)) root = nullptr; //jest pniem drzewa i ostatni
+			if ((x->left != nullptr) && (x->right != nullptr)) x->right->Join(x->left); root = x->right;
+			if ((x->left == nullptr) && (x->right != nullptr)) root = x->right;
+			if ((x->left != nullptr) && (x->right == nullptr)) root = x->left;
+		}
+		
 		else if ((x->left == nullptr) && (x->right == nullptr) && (x != root)) { //ostatni ale nie pierwszy
 			root->Root(x)->Unplug(*x);
 			
@@ -98,8 +104,10 @@ void AVLtree::Cut(Branch * x)
 			x->right->Join(x->left);
 			tmp->Join(x->right);
 		}
-
+		x->left = 0;
+		x->right = 0;
 		delete x;
+		
 	}
 		else cerr << "nie maczego usunac" << endl;
 }

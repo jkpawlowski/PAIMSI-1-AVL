@@ -32,6 +32,7 @@ void TreePrinter::Load(Branch *br) {
 	}
 	else cerr << "pusto" << endl;
 	
+	while (que.empty())que.pop();
 }
 
 void TreePrinter::Print() {

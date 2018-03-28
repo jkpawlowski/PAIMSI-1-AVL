@@ -1,13 +1,11 @@
 #include "Branch.h"
 
 
-
-
-
 Branch::~Branch()
 {
-	if (left != 0)delete left;
-	if (right != 0)delete right;
+
+	if(left!=0)delete left;
+	if(right!=0)delete right;
 	
 	
 }
@@ -79,7 +77,7 @@ bool Branch::Join(Branch* b) {
 }
 
 int Branch::High() {
-	if ((this == NULL))return 0;
+	if ((this == 0))return 0;
 
 	int r = 1;
 	int l = 1;
